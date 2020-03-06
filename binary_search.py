@@ -25,8 +25,7 @@ def find_smallest_positive(xs):
         mid = (left+right)//2
         if(left==right):
             if(xs[right]<0):
-                return None
-        print("mid = ", mid, "right =", right,  "left=", left)
+                return None 
         if 0 < xs[mid]:
             right = mid
         if 0 >= xs[mid]:
@@ -67,6 +66,49 @@ def count_repeats(xs, x):
     0
     '''
 
+def find_larger(xs, x):
+    left = 0
+    right = len(xs)-1
+    def find(left, right):
+        mid = (right-left)//2
+        if x < xs[mid]:
+            left = mid-1
+        if x >= xs[mid]:
+            right = midi
+        if(x == xs[mid] and xs[mid-1]!=x):
+            return mid-1
+        return find(left, right)
+    return find(left, right)
+
+
+def find_smaller(xs, x):
+    left = 0
+    right = len(xs)-1
+    def find_small(left, right):
+        mid = (right-left)//2 + left
+        print("left=", left, "right=", right, "mid=", mid)
+        if left == right:
+            if xs[left]<x:
+                return left
+        if left == right-1:
+            if xs[left]<x:
+                return left
+            else:
+                return right 
+        if x <= xs[mid]:
+            left = mid
+        if x > xs[mid]:
+            right = mid
+           # right = mid+1
+        return find_small(left, right)
+    return find_small(left, right)
+lis = [6, 5, 5, 4, 4, 4, 3, 3, 2, 1]
+print(find_smaller(lis, 3))
+
+la = [0, 1, 2, 3]
+print("lowest is", find_lowest(la))
+
+
 
 def argmin(f, lo, hi, epsilon=1e-3):
     '''
@@ -88,4 +130,3 @@ def argmin(f, lo, hi, epsilon=1e-3):
     >>> argmin(lambda x: (x-5)**2, -20, 0)
     -0.00016935087808430278
     '''
-
