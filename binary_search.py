@@ -52,7 +52,6 @@ def find_larger(xs, x):
     right = len(xs)-1
     def find(left, right):
         mid = (right-left)//2+left
-#        print("left=", left, "right=", right, "mid=", mid)
         if left == right:
             if xs[left]==x:
                 return left
@@ -72,8 +71,6 @@ def find_larger(xs, x):
 
 lis = [6, 5, 5, 4, 4, 4, 3, 3, 2, 1]
 print(find_larger(lis, 3))
-#list_one = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-#print("testing find larger", find_larger(list_one, 1))
 
 def find_smaller(xs, x):
     if(xs==[]):
@@ -82,7 +79,6 @@ def find_smaller(xs, x):
     right = len(xs)-1
     def find_small(left, right):
         mid = (right-left)//2 + left
-       # print("left=", left, "right=", right, "mid=", mid)
         if left == right:
             if xs[left]==x:
                 return left
@@ -97,11 +93,9 @@ def find_smaller(xs, x):
             left = mid
         if x > xs[mid]:
             right = mid
-           # right = mid+1
         return find_small(left, right)
     return find_small(left, right)
 lis = [6, 5, 5, 4, 4, 4, 3, 3, 2, 1]
-print("test smaller", find_smaller(lis, 3))
 
 
 def count_repeats(xs, x):
@@ -124,8 +118,6 @@ def count_repeats(xs, x):
     >>> count_repeats([3, 2, 1], 4)
     0
     '''
-   # print("small=", find_smaller(xs, x))
-   #print("large=", find_larger(xs, x))
     if(xs==[]):
         return 0
     smaller = find_smaller(xs, x)
@@ -171,14 +163,6 @@ def argmin(f, lo, hi, epsilon=1e-3):
         if f(m1) < f(m2):
             return go(left, m2)
     return go(left, right)
-
-epsilon = 1.0
-lo = -20
-hi = 20
-x_min = 5
-f = lambda x: (x-x_min)**2
-print("test case 1")
-print(argmin(f, lo, hi, epsilon)-x_min)
 
 
 
