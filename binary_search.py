@@ -54,6 +54,8 @@ def find_larger(xs, x):
         if left == right:
             if xs[left]==x:
                 return left
+            else:
+                return 0
         if left == right-1:
             if xs[left]>x:
                 return right
@@ -80,6 +82,8 @@ def find_smaller(xs, x):
         if left == right:
             if xs[left]==x:
                 return left
+            else:
+                return 0
         if left == right-1:
             if xs[right]<x:
                 return left
@@ -118,10 +122,12 @@ def count_repeats(xs, x):
     '''
     print("small=", find_smaller(xs, x))
     print("large=", find_larger(xs, x))
+    if(xs==[]):
+        return 0
     smaller = find_smaller(xs, x)
     larger = find_larger(xs, x)
     value = smaller-larger +1
-    if(smaller==0 and larger==0):
+    if((smaller==0 and larger==0 and xs[0]!=x) or (smaller==len(xs)-1 and larger==len(xs)-1 and xs[len(xs)-1]!=x)):
         return 0
     return value 
 #print(count_repeats([5, 4, 3, 3, 3, 3, 3, 3, 3, 2, 1], 3))  
@@ -133,8 +139,9 @@ print(count_repeats([1, 1, 1, 1, 1, 1, 1, 1, 1, 1],1))
 #test 2
 print("test 2")
 print(count_repeats([5, 4, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],1))
-
-
+print("new test")
+print(count_repeats([5], 1))
+print(count_repeats([5], 5))
 def argmin(f, lo, hi, epsilon=1e-3):
     '''
     Assumes that f is an input function that takes a float as input and returns a float with a unique global minimum,
