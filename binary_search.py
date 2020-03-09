@@ -124,8 +124,8 @@ def count_repeats(xs, x):
     >>> count_repeats([3, 2, 1], 4)
     0
     '''
-    print("small=", find_smaller(xs, x))
-    print("large=", find_larger(xs, x))
+   # print("small=", find_smaller(xs, x))
+   #print("large=", find_larger(xs, x))
     if(xs==[]):
         return 0
     smaller = find_smaller(xs, x)
@@ -162,14 +162,23 @@ def argmin(f, lo, hi, epsilon=1e-3):
     left = lo
     right = hi
     def go(left, right):
-        m1 = (left-right)/10 + left
-        m2 = (left-right)/5 + left
-        if left-right < epsilon:
+        m1 = (right-left)/10 + left
+        m2 = (right-left)/5 + left
+        if right-left < epsilon:
             return right
         if f(m1) > f(m2):
             return go(m1, right)
         if f(m1) < f(m2):
             return go(left, m2)
     return go(left, right)
+
+epsilon = 1.0
+lo = -20
+hi = 20
+x_min = 5
+f = lambda x: (x-x_min)**2
+print("test case 1")
+print(argmin(f, lo, hi, epsilon)-x_min)
+
 
 
