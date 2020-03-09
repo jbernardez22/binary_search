@@ -45,55 +45,20 @@ def find_smallest_positive(xs):
 
 
 
-def count_repeats(xs, x):
-    '''
-    Assume that xs is a list of numbers sorted from HIGHEST to LOWEST,
-    and that x is a number.
-    Calculate the number of times that x occurs in xs.
-
-    HINT: 
-    Use the following three step procedure:
-        1) use binary search to find the lowest index with a value >= x
-        2) use binary search to find the lowest index with a value < x
-        3) return the difference between step 1 and 2
-
-    I highly recommend creating stand-alone functions for steps 1 and 2
-    that you can test independently.
-
-    >>> count_repeats([5, 4, 3, 3, 3, 3, 3, 3, 3, 2, 1], 3)
-    7
-    >>> count_repeats([3, 2, 1], 4)
-    0
-    '''
-
-def find_larger_one(xs, x):
-    left = 0
-    right = len(xs)-1
-    def find(left, right):
-        mid = (right-left)//2
-        if x < xs[mid]:
-            left = mid-1
-        if x >= xs[mid]:
-            right = midi
-        if(x == xs[mid] and xs[mid-1]!=x):
-            return mid-1
-        return find(left, right)
-    return find(left, right)
-
 def find_larger(xs, x):
     left = 0
     right = len(xs)-1
     def find(left, right):
         mid = (right-left)//2+left
-        print("left=", left, "right=", right, "mid=", mid)
+#        print("left=", left, "right=", right, "mid=", mid)
         if left == right:
-            if xs[left]>x:
+            if xs[left]==x:
                 return left
         if left == right-1:
             if xs[left]>x:
-                return left
-            else:
                 return right
+            else:
+                return left
         if x < xs[mid]:
             left = mid
         if x >= xs[mid]:
@@ -103,7 +68,8 @@ def find_larger(xs, x):
 
 lis = [6, 5, 5, 4, 4, 4, 3, 3, 2, 1]
 print(find_larger(lis, 3))
-
+#list_one = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+#print("testing find larger", find_larger(list_one, 1))
 
 def find_smaller(xs, x):
     left = 0
@@ -112,10 +78,10 @@ def find_smaller(xs, x):
         mid = (right-left)//2 + left
        # print("left=", left, "right=", right, "mid=", mid)
         if left == right:
-            if xs[left]<x:
+            if xs[left]==x:
                 return left
         if left == right-1:
-            if xs[left]<x:
+            if xs[right]<x:
                 return left
             else:
                 return right 
@@ -127,7 +93,7 @@ def find_smaller(xs, x):
         return find_small(left, right)
     return find_small(left, right)
 lis = [6, 5, 5, 4, 4, 4, 3, 3, 2, 1]
-#print(find_smaller(lis, 3))
+print("test smaller", find_smaller(lis, 3))
 
 
 def count_repeats(xs, x):
@@ -150,12 +116,23 @@ def count_repeats(xs, x):
     >>> count_repeats([3, 2, 1], 4)
     0
     '''
-    value = find_smaller(xs, x) - find_larger(xs, x) - 1
-    if value<0:
-        value = 0
+    print("small=", find_smaller(xs, x))
+    print("large=", find_larger(xs, x))
+    smaller = find_smaller(xs, x)
+    larger = find_larger(xs, x)
+    value = smaller-larger +1
+    if(smaller==0 and larger==0):
+        return 0
     return value 
-print(count_repeats([5, 4, 3, 3, 3, 3, 3, 3, 3, 2, 1], 3))  
+#print(count_repeats([5, 4, 3, 3, 3, 3, 3, 3, 3, 2, 1], 3))  
+print("not in there test:")
 print(count_repeats([3, 2, 1], 4))
+#test 1
+print("test 1")
+print(count_repeats([1, 1, 1, 1, 1, 1, 1, 1, 1, 1],1))
+#test 2
+print("test 2")
+print(count_repeats([5, 4, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],1))
 
 
 def argmin(f, lo, hi, epsilon=1e-3):
