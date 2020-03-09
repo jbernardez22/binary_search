@@ -157,19 +157,19 @@ def argmin(f, lo, hi, epsilon=1e-3):
     -0.00016935087808430278
     '''
 
-    if(hi-lo<epsilon):
-        return hi
+   # if(hi-lo<epsilon):
+      #  return hi
     left = lo
     right = hi
     def go(left, right):
-        m1 = (high-low)/10 + left
-        m2 = (high-low)/5 + left
-        if  high - low < epsilon:
-            return high
+        m1 = (hi-lo)/10 + left
+        m2 = (hi-lo)/5 + left
+        if  hi - lo < epsilon:
+            return hi
         if f(m1) > f(m2):
-            return go(m1, high)
+            return go(m1, hi)
         if f(m1) < f(m2):
-            return go(low, m2)
-    return go(low, high)
+            return go(lo, m2)
+    return go(lo, hi)
 
 
