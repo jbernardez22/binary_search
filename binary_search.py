@@ -46,6 +46,8 @@ def find_smallest_positive(xs):
 
 
 def find_larger(xs, x):
+    if(xs==[]):
+        return 0
     left = 0
     right = len(xs)-1
     def find(left, right):
@@ -74,6 +76,8 @@ print(find_larger(lis, 3))
 #print("testing find larger", find_larger(list_one, 1))
 
 def find_smaller(xs, x):
+    if(xs==[]):
+        return 0
     left = 0
     right = len(xs)-1
     def find_small(left, right):
@@ -130,18 +134,8 @@ def count_repeats(xs, x):
     if((smaller==0 and larger==0 and xs[0]!=x) or (smaller==len(xs)-1 and larger==len(xs)-1 and xs[len(xs)-1]!=x)):
         return 0
     return value 
-#print(count_repeats([5, 4, 3, 3, 3, 3, 3, 3, 3, 2, 1], 3))  
-print("not in there test:")
-print(count_repeats([3, 2, 1], 4))
-#test 1
-print("test 1")
-print(count_repeats([1, 1, 1, 1, 1, 1, 1, 1, 1, 1],1))
-#test 2
-print("test 2")
-print(count_repeats([5, 4, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],1))
-print("new test")
-print(count_repeats([5], 1))
-print(count_repeats([5], 5))
+
+
 def argmin(f, lo, hi, epsilon=1e-3):
     '''
     Assumes that f is an input function that takes a float as input and returns a float with a unique global minimum,
@@ -162,4 +156,20 @@ def argmin(f, lo, hi, epsilon=1e-3):
     >>> argmin(lambda x: (x-5)**2, -20, 0)
     -0.00016935087808430278
     '''
-    print("hello")
+
+    if(hi-lo<epsilon):
+        return hi
+    left = lo
+    right = hi
+    def go(left, right):
+        m1 = (high-low)/10 + left
+        m2 = (high-low)/5 + right
+        if  high - low < epsilon:
+            return high
+        if f(m1) > f(m2):
+            return go(m1, high)
+        if f(m1) < f(m2):
+            return go(low, m2)
+    return go(low, high)
+
+
